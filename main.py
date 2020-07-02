@@ -24,7 +24,7 @@ def query_write():
     headers = {"Authorization":"Bearer 7f6ce6e19498f1fddfa28b49a8b05405ac5b409c"}
 
     req = json.loads(requests.get(url, headers=headers).text)
-    msg = {"ID" : req["items"][0]["deviceId"], "DATE" : req["items"][0]["receivedAt"]}
+    msg = {"ID" : req["items"][0]["deviceId"], "DATE" : req["items"][0]["receivedAt"][0:10], "TIME" : req["items"][0]["receivedAt"][11:-1]}
 
     num = 0
     while num < len(req["items"]):
