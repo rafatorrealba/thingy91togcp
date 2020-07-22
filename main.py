@@ -8,13 +8,13 @@ def main(request):
     request_json = request.get_json()
     if request.args and 'message' in request.args:
         query_write()
-        return f'Basde de datos actualizada'
+        return f'Base de datos actualizada'
     elif request_json and 'message' in request_json:
         query_write()
-        return f'Basde de datos actualizada'
+        return f'Base de datos actualizada'
     else:
         query_write()
-        return f'Basde de datos actualizada'
+        return f'Base de datos actualizada'
 
 def query_write():
     cred = credentials.Certificate("key.json")
@@ -34,6 +34,8 @@ def query_write():
             msg.update({"HUMID" : req["items"][num]["message"]["data"]})
         elif req["items"][num]["message"]["appId"] == "AIR_PRESS":
             msg.update({"AIR_P" : req["items"][num]["message"]["data"]})
+        elif req["items"][num]["message"]["appId"] == "FLIP":
+            msg.update({"FLIP" : req["items"][num]["message"]["data"]})
         num += 1
 
     store = firestore.client()
